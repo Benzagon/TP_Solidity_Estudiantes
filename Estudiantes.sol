@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.12;
 
 contract Estudiante
 {
@@ -7,13 +7,15 @@ contract Estudiante
     string private _apellido;
     string private _curso;
     address private _docente;
-    mapping(string => uint8) private _notas_materia;
 
-    constructor(string memory nombre_, string memory apellido_, string memory curso_)
+    mapping(string => uint8) private _notas_materia;
+    uint8[] private notas;
+
+    constructor(string memory nombre, string memory apellido, string memory curso)
     {
-        _nombre = nombre_;
-        _apellido = apellido_;
-        _curso = curso_;
+        nombre = nombre;
+        apellido = apellido;
+        curso = curso;
 
         _docente = msg.sender;
     }
@@ -23,44 +25,47 @@ contract Estudiante
         return _apellido;
     }
 
-    // function get_nombre_completo() public view returns (string memory)
-    // {
-    //     return (_nombre + " " + _apellido);
-    // }
+    function get_nombre_completo() public view returns (string memory)
+    {
+        return string.concat(_nombre," ", _apellido);
+    }
 
     function get_curso() public view returns(string memory)
     {
         return _curso;
     }
 
-    function set_nota_materia(uint8 nota_, string memory materia_) public
+    function set_notamateria(uint8 nota, string memory materia_) public
     {
         require(msg.sender == _docente, "Solo el docente registrado puede asignar notas");
-        _notas_materia[materia_] = nota_;
+        _notasmateria[materia] = nota_;
+        notas.push(nota);
     }
 
-    function get_nota_materia(string memory materia_) public view returns(uint8)
+    function get_notamateria(string memory materia) public view returns(uint8)
     {
-        return _notas_materia[materia_];
+        return _notasmateria[materia];
     }
 
     function aprobo(string memory materia_) public view returns(bool)
     {
-        if(_notas_materia[materia_] >= 60)
+        if(_notasmateria[materia] >= 60)
         {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-
-    //NO Funca
-    function promedio() public view returns(int)
+    function promedio() public view returns(uint256)
     {
-        uint8 private _promedio = 0;
-        for(int i = 0; i < _notas_materias.length; i++)
+        uint256 _promedio = 0;
+
+        for(uint8 i = 0; i < _notas.length; i++)
         {
-            _promedio += _notas_materia[i]
+            _promedio += _notas[i];
         }
+
+        _promedio /= _notas.length;
+        return _promedio;
     }
 }
