@@ -9,7 +9,11 @@ contract Estudiante
     address private _docente;
 
     mapping(string => uint256) private _notas_materia;
+    
+    mapping(string => uint256)[4] private _bim_mat_notas;
+
     string[] private _materias;
+    uint256[4] private _bimestres;
 
     constructor(string memory nombre_, string memory apellido_, string memory curso_)
     {
@@ -35,35 +39,42 @@ contract Estudiante
         return _curso;
     }
 
-    function set_notamateria(uint256 nota_, string memory materia_) public
+    function set_notamateria(uint256 nota_, string memory materia_, uint256 bim_) public
     {
         require(msg.sender == _docente, "Solo el docente registrado puede asignar notas");
-        _notas_materia[materia_] = nota_;
-        _materias.push(materia_);
+        //_notas_materia[materia_] = nota_;
+
+        _bim_mat_notas[bim_][materia_] = nota_;
+        
+        _bimestres[bim_] = _materias[materia_];
     }
 
-    function get_notamateria(string memory materia_) public view returns(uint256)
+    function get_notamateria(string memory materia_, uint256 bim_) public view returns(uint256)
     {
-        return _notas_materia[materia_];
+        return _bim_mat_notas[bim_][materia_];
     }
 
-    function aprobo(string memory materia_) public view returns(bool)
+    function aprobo(string memory materia_, uint256 bim_) public view returns(bool)
     {
-        if(_notas_materia[materia_] >= 60)
+        if(_bim_mat_notas[bim_][materia_] >= 60)
         {
             return true;
         }
         return false;
     }
 
-    function promedio() public view returns(uint256)
+    function promedio(uint256 bimestre_) public view returns(uint256)
     {
         uint256 _promedio = 0;
 
-        for(uint256 i = 0; i < _materias.length; i++)
+        for(uint256 i = 0; i < 4; i++)
         {
-            _promedio += _notas_materia[_materias[i]];
+            for(uint256 i = 0; i < _materias.length; i++)
+            {
+                _promedio += _bim_mat_notas[bimestre_][_materias[i]];
+            }
         }
+        
 
         _promedio /= _materias.length;
         return _promedio;
