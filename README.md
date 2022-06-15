@@ -1,5 +1,9 @@
 # TP_Solidity_Estudiantes
  
+Integrantes: Gonzalo B. y Luis E.
+
+Utilizamos una versión más nueva para poder usar la función concat() para concatenar strings al llamar nombre_completo().
+
 Link a Etherscan Estudiantes.sol : https://rinkeby.etherscan.io/address/0xD2C8975131043Cd0562de058e085f1AEC47a269B
 
 A) Modificamos el smart contract para que acepte notas de los 4 bimestres utilizando un array de mappings para
