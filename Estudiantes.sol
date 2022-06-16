@@ -38,8 +38,13 @@ contract Estudiante
     function set_notamateria(uint256 nota_, string memory materia_) public
     {
         require(msg.sender == _docente, "Solo el docente registrado puede asignar notas");
+        
+        if(_notas_materia[materia_] == 0)
+        {
+           _materias.push(materia_); 
+        }
+        
         _notas_materia[materia_] = nota_;
-        _materias.push(materia_);
     }
 
     function get_notamateria(string memory materia_) public view returns(uint256)

@@ -53,10 +53,17 @@
 
             require(msg.sender == _docente || _isDocente == true, "Solo el docente registrado puede asignar notas");
             
+            for(uint256 i = 0; i < 4; i++)
+            {
+                if(_bim_mat_notas[i][materia_] == 0)
+                {
+                    _materias.push(materia_);
+                    break;
+                }
+            }
+
             _bim_mat_notas[bim_][materia_] = nota_;
             
-            _materias.push(materia_);
-
             emit log_nota_agregada("Nota agregada con estas caracteristicas: ", msg.sender, bim_, materia_, nota_);
         }
 

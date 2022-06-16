@@ -1,4 +1,4 @@
-# TP_Solidity_Estudiantes
+﻿# TP_Solidity_Estudiantes
  
 Integrantes: Gonzalo B. y Luis E.
 
@@ -8,6 +8,7 @@ Link a Etherscan Estudiantes.sol : https://rinkeby.etherscan.io/address/0xD2C897
 
 A) Modificamos el smart contract para que acepte notas de los 4 bimestres utilizando un array de mappings para
 asi poder acceder a las notas y materias en cada posición del array individualmente por cada bimestre.
+(Para arreglar un error, al pushear las materias_ al array dejó de funcionar el promedio cuando modificas una materia ya existente.)
 
 B) Para hacerto, primero creamos un array del tipo "adress" llamado "_docentes_asignados". Luego, creamos una función la
 cuál solamente puede correr el docente administrador (también podría ser que cualquier docente dentro del array pueda
