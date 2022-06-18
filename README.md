@@ -3,12 +3,12 @@
 Integrantes: Gonzalo B. y Luis E.
 
 Utilizamos una versión más nueva para poder usar la función concat() para concatenar strings al llamar nombre_completo().
+También utilizamos hardhat para poder debuggear código en la consola.
 
 Link a Etherscan Estudiantes.sol : https://rinkeby.etherscan.io/address/0xD2C8975131043Cd0562de058e085f1AEC47a269B
 
 A) Modificamos el smart contract para que acepte notas de los 4 bimestres utilizando un array de mappings para
 asi poder acceder a las notas y materias en cada posición del array individualmente por cada bimestre.
-(Para arreglar un error, al pushear las materias_ al array dejó de funcionar el promedio cuando modificas una materia ya existente.)
 
 B) Para hacerto, primero creamos un array del tipo "adress" llamado "_docentes_asignados". Luego, creamos una función la
 cuál solamente puede correr el docente administrador (también podría ser que cualquier docente dentro del array pueda

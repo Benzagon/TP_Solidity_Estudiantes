@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
     pragma solidity ^0.8.13;
+    import "hardhat/console.sol";
 
     contract Estudiante
     {
@@ -42,6 +43,8 @@
         function set_notamateria(uint256 nota_, string memory materia_, uint256 bim_) public
         {
             bool _isDocente = false;
+            bool _isAMateria = false;
+
             for(uint256 i = 0; i < _docentes_asignados.length; i++)
             {
                 if(_docentes_asignados[i] == msg.sender)
@@ -55,11 +58,16 @@
             
             for(uint256 i = 0; i < 4; i++)
             {
-                if(_bim_mat_notas[i][materia_] == 0)
+                if(_bim_mat_notas[i][materia_] != 0)
                 {
-                    _materias.push(materia_);
+                    _isAMateria = true;
                     break;
                 }
+            }
+
+            if(_isAMateria == false)
+            {
+                _materias.push(materia_);
             }
 
             _bim_mat_notas[bim_][materia_] = nota_;
@@ -98,7 +106,8 @@
                     _promedio += _bim_mat_notas[i][_materias[j]];
                 }
             }
-
+            
+            console.log("cantidad de materias: ", _materias.length);
             _promedio /= _materias.length;
             return _promedio;
         }
